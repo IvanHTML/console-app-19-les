@@ -87,7 +87,7 @@ rememberMyFilms();
 
 function detectPersonalLevel() {
     for (let i = 0; i < 2; i++) {
-        const lastViewedFilm = prompt('Один из последних просмотренных фильмов?', '');
+        const lastViewedFilm = prompt('Один из последних просмотренных фильмов?', '').trim();
         const lastViewedFilmRate = +prompt('На сколько оцените его?', '');
     
         if (lastViewedFilm != null && lastViewedFilmRate != null && lastViewedFilm != '' && lastViewedFilmRate != '' && lastViewedFilm.length < 50) {
@@ -108,6 +108,15 @@ function showMyDB() {
         console.log('Access not accepted');
     }
 }
+
+// with arguments
+
+// function showMyDB(hidden) {
+//     if (!hidden) {
+//         console.log(personalMovieDB);
+//     }
+// }
+// showMyDB(personalMovieDB.privat);
 
 
 function writeYourGenres() {
