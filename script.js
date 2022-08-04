@@ -34,9 +34,33 @@
 
 // 4) Потренироваться и переписать цикл еще двумя способами*/
 
+// Lesson 3
+
+/* Задание на урок:
+
+1) Первую часть задания повторить по уроку
+
+2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
+false - выводит в консоль главный объект программы
+
+3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres
+
+P.S. Функции вызывать не обязательно*/
+
 'use strict';
 
-const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели', '');
+let numberOfFilms;
+
+function start() {
+    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели', '');
+
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели', '');
+    }
+}
+start();
 
 
 const personalMovieDB = {
@@ -47,29 +71,54 @@ const personalMovieDB = {
     privat: false
 };
 
-if (personalMovieDB.count < 10) {
-    console.log("Просмотрено довольно мало фильмов");
-} else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
-    console.log("Вы классический зритель");
-} else if (personalMovieDB.count >= 30) {
-    console.log("Вы киноман");
-} else {
-    console.log('"Произошла ошибка"');
-}
-
-
-for (let i = 0; i < 2; i++) {
-    const lastViewedFilm = prompt('Один из последних просмотренных фильмов?', '');
-    const lastViewedFilmRate = +prompt('На сколько оцените его?', '');
-
-    if (lastViewedFilm != null && lastViewedFilmRate != null && lastViewedFilm != '' && lastViewedFilmRate != '' && lastViewedFilm.length < 50) {
-        personalMovieDB.movies[lastViewedFilm] = lastViewedFilmRate;
-        console.log('well done');
+function rememberMyFilms() {
+    if (personalMovieDB.count < 10) {
+        console.log("Просмотрено довольно мало фильмов");
+    } else if (personalMovieDB.count > 10 && personalMovieDB.count < 30) {
+        console.log("Вы классический зритель");
+    } else if (personalMovieDB.count >= 30) {
+        console.log("Вы киноман");
     } else {
-        console.log('some error');
-        i--;
+        console.log('"Произошла ошибка"');
     }
 }
+rememberMyFilms();
+
+
+function detectPersonalLevel() {
+    for (let i = 0; i < 2; i++) {
+        const lastViewedFilm = prompt('Один из последних просмотренных фильмов?', '');
+        const lastViewedFilmRate = +prompt('На сколько оцените его?', '');
+    
+        if (lastViewedFilm != null && lastViewedFilmRate != null && lastViewedFilm != '' && lastViewedFilmRate != '' && lastViewedFilm.length < 50) {
+            personalMovieDB.movies[lastViewedFilm] = lastViewedFilmRate;
+            console.log('well done');
+        } else {
+            console.log('some error');
+            i--;
+        }
+    }
+}
+detectPersonalLevel();
+
+function showMyDB() {
+    if (personalMovieDB.privat === false) {
+        console.log(personalMovieDB);
+    } else {
+        console.log('Access not accepted');
+    }
+}
+
+
+function writeYourGenres() {
+    for (let i = 1; i <= 3; i++) {
+        personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`, '');
+    }
+}
+writeYourGenres();
+showMyDB();
+
+
 
 // let i = 0;
 // while ( i < 2 ) {
@@ -88,6 +137,6 @@ for (let i = 0; i < 2; i++) {
 
 
 // console.log(personalMovieDB.movies);
-console.log(personalMovieDB);
+
 
 
